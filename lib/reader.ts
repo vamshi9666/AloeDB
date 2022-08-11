@@ -64,7 +64,7 @@ async function exists(path: string): Promise<boolean> {
  */
 function existsSync(path: string): boolean {
 	try {
-		Deno.lstatSync(path);
+		Deno.lstat(path);
 		return true;
 	} catch (error) {
 		if (error instanceof Deno.errors.NotFound) return false;
@@ -102,7 +102,7 @@ async function ensureFile(path: string, data: string = ''): Promise<void> {
  */
 function ensureFileSync(path: string, data: string = ''): void {
 	try {
-		const info = Deno.lstatSync(path);
+		const info = Deno.lstat(path);
 		if (!info.isFile) throw new Error('Invalid file specified');
 	} catch (error) {
 		if (error instanceof Deno.errors.NotFound) {
@@ -142,7 +142,7 @@ async function ensureDir(path: string): Promise<void> {
  */
 function ensureDirSync(path: string): void {
 	try {
-		const info: Deno.FileInfo = Deno.lstatSync(path);
+		const info: Deno.FileInfo = Deno.lstat(path);
 		if (!info.isDirectory) throw new Error('Invalid directory specified');
 	} catch (error) {
 		if (error instanceof Deno.errors.NotFound) {
